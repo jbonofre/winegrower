@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Apache Winegrower</title>
+<title>Apache Winegrower JUnit5</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -522,20 +522,130 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Apache Winegrower</h1>
+<h1>Apache Winegrower JUnit5</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#dependency">Dependency</a></li>
+<li><a href="#winegrower">@Winegrower</a></li>
+<li><a href="#monowinegrower">@MonoWinegrower</a></li>
+<li><a href="#inject-your-services">Inject your Services</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="core/index.html">Core</a> documentation</p>
-</li>
-<li>
-<p><a href="extensions/index.html">Extension</a> documentation</p>
-</li>
-</ul>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Winegrower JUnit5 allows to rely on the modern JUnit 5 framework
+to test your application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dependency"><a class="anchor" href="#dependency"></a>Dependency</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.winegrower<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>winegrower-testing-junit5<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>${winegrower.version}<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="winegrower"><a class="anchor" href="#winegrower"></a>@Winegrower</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>@Winegrower</code> allows to start a <code>Ripener</code> per class. Each test class
+will use its own configuration based on the setup done thanks to
+<code>@Winegrower</code>.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Winegrower</span>
+<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
+    <span class="annotation">@Test</span>
+    <span class="type">void</span> doYourTest() {
+        <span class="comment">// ...</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="monowinegrower"><a class="anchor" href="#monowinegrower"></a>@MonoWinegrower</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>@MonoWinegrower</code> is close to the previous flavor but it starts the <code>Ripener</code>
+a single time for the whole JVM lifecycle. It takes its configuration from a
+SPI on <code>Ripener.Configuration</code> class (registered thanks to <code>META-INF/services/org.apache.winegrower.Ripener$Configuration</code>).
+If you don&#8217;t register a custom configuration, default one is used.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+this flavor boots your performances but all your test classes will
+share the same state so ensure to not leak anything which can impact another test.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@MonoWinegrower</span>
+<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
+    <span class="annotation">@Test</span>
+    <span class="type">void</span> doYourTest() {
+        <span class="comment">// ...</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="inject-your-services"><a class="anchor" href="#inject-your-services"></a>Inject your Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can get services injected using <code>@InjectedService</code> in a class field.
+It also supports the <code>Ripener</code> and <code>OSGiServices</code>. These last two can be injected
+as test method parameters as well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Winegrower</span>
+<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
+    <span class="annotation">@InjectedService</span>
+    <span class="directive">private</span> Ripener ripener;
+
+    <span class="annotation">@InjectedService</span>
+    <span class="directive">private</span> OSGiServices services;
+
+    <span class="annotation">@Test</span>
+    <span class="type">void</span> myTest(<span class="directive">final</span> Ripener ripener) {
+        <span class="comment">// ....</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">

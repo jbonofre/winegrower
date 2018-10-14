@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Apache Winegrower</title>
+<title>Apache Winegrower CDI</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -522,20 +522,44 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Apache Winegrower</h1>
+<h1>Apache Winegrower CDI</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#bootstrap-cdi">Bootstrap CDI</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="core/index.html">Core</a> documentation</p>
-</li>
-<li>
-<p><a href="extensions/index.html">Extension</a> documentation</p>
-</li>
-</ul>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Winegrower CDI extension allows to register in CDI context
+a <code>Ripener</code>, its configuration, <code>OSGiServices</code> registry and all services
+not using a <code>java.*</code> class.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bootstrap-cdi"><a class="anchor" href="#bootstrap-cdi"></a>Bootstrap CDI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To let the extension know which <code>Ripener</code> instance to use you must wrap the CDI
+bootstrap. You can do it with <code>wrapCdiBoot</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">try</span> (<span class="directive">final</span> Ripener ripener = <span class="keyword">new</span> Ripener.Impl(<span class="keyword">new</span> Ripener.Configuration());
+        <span class="directive">final</span> SeContainer container = WinegrowerExtension.RipenerLocator
+            .wrapCdiBoot(ripener, () -&gt; SeContainerInitializer.newInstance().initialize())) {
+    <span class="directive">final</span> Ripener cdiRipener = container.select(Ripener.class).get();
+    <span class="comment">// cdiRipener == ripener</span>
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
