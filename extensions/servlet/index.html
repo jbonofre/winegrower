@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Apache Winegrower Core</title>
+<title>Apache Winegrower Servlet</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -522,13 +522,107 @@ table.CodeRay td.code>pre{padding:0}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Apache Winegrower Core</h1>
+<h1>Apache Winegrower Servlet</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#configuration">Configuration</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>TBD</p>
+<p>This module allows to deploy Winegrower in a Servlet environment
+like Apache Tomcat, Standalone Jetty, Meecrowave or even a EE server like Apache TomEE.</p>
+</div>
+<div class="paragraph">
+<p>Just drop the module in your webapp:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.winegrower<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>winegrower-servlet<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>${winegrower.version}<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+the <code>Ripener</code> instance is set in the <code>ServletContext</code> as an attribute. The key of the attribute is the <code>Ripener</code> qualified class name.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The configuration can be set as servlet context init parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.skip</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Should the  <code>Ripener</code> be started</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.workdir</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instance work directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.prioritizedBundles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of prioritized bundles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.scanningIncludes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bundle discovery includes (not native OSGi bundles)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.scanningExcludes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bundle discovery excludes (not native OSGi bundles)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.manifestContributors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of contributors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">winegrower.servlet.ripener.configuration.jarFilter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filter implementation class name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div id="footer">
