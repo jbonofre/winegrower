@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Apache Winegrower</title>
+<title>Apache Winegrower Agent</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -524,18 +524,40 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="article">
 <div id="header">
-<h1>Apache Winegrower</h1>
+<h1>Apache Winegrower Agent</h1>
 </div>
 <div id="content">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="core/index.html">Core</a> documentation</p>
-</li>
-<li>
-<p><a href="extensions/index.html">Extension</a> documentation</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The Apache Winegrower agent provides a Javaagent which will
+starts Winegrower <code>Ripener</code> class.</p>
+</div>
+<div class="paragraph">
+<p>It uses the same configuration as other extensions and it is read from
+the agent args.</p>
+</div>
+<div class="paragraph">
+<p>It provides a shade jar which is easier to use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent-${winegrower.version}-fatjar.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With configuration it can look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent-${winegrower.version}-fatjar.jar=workDir=/tmp/winegrower|ignoredBundles=cxf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the available options and their actual values activating the debug mode which will log the whole configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-Dwinegrower.agent.debug=true</code></pre>
+</div>
 </div>
 </div>
 <div id="footer">
