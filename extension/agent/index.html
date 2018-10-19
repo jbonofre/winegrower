@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
+<title>Apache Winegrower Agent</title>
+<link rel="stylesheet" href="/home/rmannibucau/1_dev/winegrower/winegrower-documentation/.asciidoctor/theme/manual/src/main/asciidoc/style/apache.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/home/rmannibucau/1_dev/winegrower/winegrower-documentation/.asciidoctor/theme/manual/src/main/asciidoc/style/coderay-asciidoctor.css">
+</head>
+<body class="article toc2 toc-right">
+<div id="header">
+<div class="menu">
+</div>
+
+<h1>Apache Winegrower Agent</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#select-your-distribution">Select your "distribution"</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Apache Winegrower agent provides a Javaagent which will
+starts Winegrower <code>Ripener</code> class.</p>
+</div>
+<div class="paragraph">
+<p>It uses the same configuration as other extensions and it is read from
+the agent args.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent-${winegrower.version}.jar</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With configuration it can look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent-${winegrower.version}.jar=workDir=/tmp/winegrower|ignoredBundles=cxf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the available options and their actual values activating the debug mode which will log the whole configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-Dwinegrower.agent.debug=true</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="select-your-distribution"><a class="anchor" href="#select-your-distribution"></a>Select your "distribution"</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The java agent is just starting a ripener but it does not provide any library. To do that
+you have to set <code>libs</code> parameter of the agent. You can use <code>core</code> or <code>jaxrs</code> prebuilt binaries (point to their lib folder
+once the zip exploded):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent-${winegrower.version}.jar=libs=/opt/winegrower/distro/lib</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you pick the JAX-RS distribution for instance and unpack it in /opt/winegrower/jaxrs
+and write a plugin (let say a JAX-RS whiteboard endpoint) then you can
+deploy the following plugin using the JAX-RS distribution using this JVM configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">-javaagent:winegrower-agent.jar=libs=/opt/user/plugin,/opt/winegrower/jaxrs/lib|ignoredBundles=cxf \
+    -Dwinegrower.service.org.apache.aries.jax.rs.whiteboard.default.osgi.http.whiteboard.context.path=/test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration is the one needed for JAX-RS whiteboard and is propagated to the <code>Ripener</code> instance started by the java agent.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-10-19 17:15:10 CEST
+</div>
+</div>
+</body>
+</html>

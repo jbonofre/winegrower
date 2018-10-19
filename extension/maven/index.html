@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
+<title>Apache Winegrower Maven Plugin</title>
+<link rel="stylesheet" href="/home/rmannibucau/1_dev/winegrower/winegrower-documentation/.asciidoctor/theme/manual/src/main/asciidoc/style/apache.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/home/rmannibucau/1_dev/winegrower/winegrower-documentation/.asciidoctor/theme/manual/src/main/asciidoc/style/coderay-asciidoctor.css">
+</head>
+<body class="article toc2 toc-right">
+<div id="header">
+<div class="menu">
+</div>
+
+<h1>Apache Winegrower Maven Plugin</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Winegrower Maven plugin allows to start an instance very easily thanks to <code>pour</code> command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">mvn winegrower:pour</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Property</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Default</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>dependencyScopes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.dependencyScopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>provided,compile,system,runtime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>which scopes to includes to build the deployment classloader.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>jarFilter</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.jarFilter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>custom <code>Predicate&lt;String&gt;</code> implementation to use as jar filter in the <code>Ripener.Configuration</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>manifestContributors</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.manifestContributors</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All manifets contributors to use for the <code>Ripener.Configuration</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>scanningExcludes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.scanningExcludes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All exclusions to use for the <code>Ripener.Configuration</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>scanningIncludes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.scanningIncludes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>All inclusions to use for the <code>Ripener.Configuration</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>workDir</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.workDir</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/winegrower/workdir</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>the <code>Ripener.Configuration</code> work directory.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>systemVariables</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.systemVariables</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/winegrower/workdir</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>System properties set before the instance start and resetted after the shutdown.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>waitOnSystemIn</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.waitOnSystemIn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/winegrower/workdir</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>should the mojo wait you enter any character to exist, it is useful to disable it if you use the Karaf shell which reads <code>System.in</code> as well.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="example"><a class="anchor" href="#example"></a>Example</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.winegrower<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>winegrower-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>${winegrower.version}<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;configuration&gt;</span>
+    <span class="tag">&lt;systemVariables&gt;</span>
+      <span class="tag">&lt;karaf.startLocalConsole&gt;</span>true<span class="tag">&lt;/karaf.startLocalConsole&gt;</span>
+    <span class="tag">&lt;/systemVariables&gt;</span>
+    <span class="tag">&lt;waitOnSystemIn&gt;</span>false<span class="tag">&lt;/waitOnSystemIn&gt;</span> <span class="comment">&lt;!-- cause of the shell --&gt;</span>
+  <span class="tag">&lt;/configuration&gt;</span>
+<span class="tag">&lt;/plugin&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-10-19 17:15:09 CEST
+</div>
+</div>
+</body>
+</html>
