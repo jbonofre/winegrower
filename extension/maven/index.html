@@ -79,6 +79,26 @@ main {
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
+<p>Apache Winegrower Maven plugin provides the elementary tasks to develop and package your application depending your need.</p>
+</div>
+<div class="paragraph">
+<p>Here is how to declare it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
+  <span class="tag">&lt;groupId&gt;</span>org.apache.winegrower<span class="tag">&lt;/groupId&gt;</span>
+  <span class="tag">&lt;artifactId&gt;</span>winegrower-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
+  <span class="tag">&lt;version&gt;</span>${winegrower.version}<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/plugin&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start-a-dev-instance-a-k-a-pour"><a class="anchor" href="#start-a-dev-instance-a-k-a-pour"></a>Start a dev instance (a.k.a. <code>Pour</code>)</h2>
+<div class="sectionbody">
+<div class="paragraph">
 <p>Apache Winegrower Maven plugin allows to start an instance very easily thanks to <code>pour</code> command:</p>
 </div>
 <div class="listingblock">
@@ -86,11 +106,8 @@ main {
 <pre class="CodeRay highlight"><code data-lang="sh">mvn winegrower:pour</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -184,10 +201,8 @@ main {
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="example"><a class="anchor" href="#example"></a>Example</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="example"><a class="anchor" href="#example"></a>Example</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
@@ -202,6 +217,253 @@ main {
   <span class="tag">&lt;/configuration&gt;</span>
 <span class="tag">&lt;/plugin&gt;</span></code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-fatjar"><a class="anchor" href="#create-a-fatjar"></a>Create a fatjar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creating a fatjar is a common need. For OSGi it becomes quite an issue
+since you need to keep each <code>MANIFEST.MF</code> as it since some values can&#8217;t become plural.
+This is the main blocker making the <code>maven-shade-plugin</code> and <code>maven-assembly-plugin</code> quite helpless
+on that task.</p>
+</div>
+<div class="paragraph">
+<p>To solve that, Winegrower provides a <code>fatjar</code> goal which will generate an index of each shaded jars
+and keep their manifests as it and the runtime knows how to read them back.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">mvn winegrower:fatjar</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-2"><a class="anchor" href="#configuration-2"></a>Configuration</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Property</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Default</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>attach</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.attach</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>should the built jar be attached (installed)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>buildArtifact</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.buildArtifact</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/${project.build.finalName}.${project.packaging}.</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path of the project artifact if any.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>classifier</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.classifier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fatjar</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The classifier to use if the produced artifact is attached.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>includeScopes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.includeScopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>provided,compile,runtime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The scopes included in the produced artifact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>output</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.output</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/${project.artifactId}-fatjar.jar</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Where the fatjar is produced.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-a-distribution"><a class="anchor" href="#create-a-distribution"></a>Create a distribution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since Winegrower does not require an OSGi runtime anymore, it also provide a <code>distribution</code> goal
+which will bundle your application as a standard java application with a <code>lib/</code> folder
+and scripts in <code>bin</code> to start/stop the application.</p>
+</div>
+<div class="paragraph">
+<p>The scripts are highly inspired from Apache Tomcat ones so if you are familiar with this server
+you shouldn&#8217;t be lost.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">mvn winegrower:distribution</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then once the distributino unzipped you can start using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">./bin/wingrower.sh run</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-3"><a class="anchor" href="#configuration-3"></a>Configuration</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Property</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Default</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>attach</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.attach</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>should the built distributions be attached (installed)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>buildArtifact</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.buildArtifact</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/${project.build.finalName}.${project.packaging}.</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path of the project artifact if any.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>classifier</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.classifier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fatjar-%s.</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The classifier to use if the produced artifact is attached. Note it is a pattern (<code>String.format</code>) taking the format as parameter.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>includeScopes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.includeScopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>provided,compile,runtime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The scopes included in the produced artifact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>conf</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.conf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>src/main/winegrower/conf</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path synchronized with the distribution conf folder.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>bin</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.bin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>src/main/winegrower/bin</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path synchronized with the distribution bin folder.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>formats</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.formats</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zip</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Distribution formats, <code>zip</code> and <code>tar.gz</code> are supported.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>keepExplodedFolder</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.keepExplodedFolder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should the distribution work directory be kept in the build directory.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>libs</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.libs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>List of maven coordinates (<code>group:artifact:version[?transitive]</code>) to include in the distribution even if not visible as dependency.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>main</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.main</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.winegrower.Ripener</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The main to run when starting the distribution.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>skipArchiveRootFolder</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.skipArchiveRootFolder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should the distribution keep a root folder.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>workDir</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.workDir</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/${project.artifactId}-distribution</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Where the distribution is built during the build.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
