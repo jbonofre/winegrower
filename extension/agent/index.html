@@ -143,6 +143,44 @@ deploy the following plugin using the JAX-RS distribution using this JVM configu
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="configuration-keys"><a class="anchor" href="#configuration-keys"></a>Configuration keys</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note: see <a href="../../index.html">core</a> configuration for more details on how to use these configuration entries.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ignoredBundles</p>
+</li>
+<li>
+<p>jarFilter</p>
+</li>
+<li>
+<p>manifestContributors</p>
+</li>
+<li>
+<p>prioritizedBundles</p>
+</li>
+<li>
+<p>scanningExcludes</p>
+</li>
+<li>
+<p>scanningIncludes</p>
+</li>
+<li>
+<p>workDir</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It also support the specific configuration <code>libs</code> which takes either a folder which is converted in the list of contained jars
+or directly some jar paths. The paths are appended to the system classloader before the <code>Ripener</code> is started.
+It allows to explode some distribution and start it without having to do a fatjar or so of the distribution.</p>
+</div>
+</div>
+</div>
 </div>
 
 </div><div class="anchors col-sm-2"></div></main>

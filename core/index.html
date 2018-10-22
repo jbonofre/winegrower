@@ -81,8 +81,69 @@ main {
 <h1>Apache Winegrower Core</h1>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>TBD</p>
+<p>Winegrower core is the implementation of the light and embeddable OSGi model.
+It intends to respect OSGi programming model except the classloading one.
+It means you can use <code>Activator</code>, <code>scr</code> etc&#8230;&#8203;without isolation which boots the packaging
+and deployment of your application.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="entry-point"><a class="anchor" href="#entry-point"></a>Entry point</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The entry point is the <code>Ripener</code> class which is the "container" API.
+The nested <code>Ripener.Impl</code> class is one implementation you can use out of the box.</p>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
+<div class="paragraph">
+<p><code>Ripener</code> takes a <code>Ripener.Configuration</code> configuration as parameter.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ignoredBundles</dt>
+<dd>
+<p>which valid bundles must be ignored. Useful when some bundles are conflicting like JAX-RS whiteboard of Apache Aries and the native CXF bundles.</p>
+</dd>
+<dt class="hdlist1">jarFilter</dt>
+<dd>
+<p>a filter on OSGi bundles. It will behave as <code>ignoredBundles</code> but is intended to host bundles which don&#8217;t need to be bundles (like <code>commons-*</code>) and keep your configuration readable.</p>
+</dd>
+<dt class="hdlist1">manifestContributors</dt>
+<dd>
+<p>the list of implementation of <code>ManifestContributor</code> to create a manifest on the fly for not OSGi bundle jars.</p>
+</dd>
+<dt class="hdlist1">prioritizedBundles</dt>
+<dd>
+<p>a sorted list of bundles which will be started before others.</p>
+</dd>
+<dt class="hdlist1">scanningExcludes</dt>
+<dd>
+<p>exclusions for non OSGi jars scanning.</p>
+</dd>
+<dt class="hdlist1">scanningIncludes</dt>
+<dd>
+<p>inclusions for non OSGi jars scanning.</p>
+</dd>
+<dt class="hdlist1">workDir</dt>
+<dd>
+<p>where to create temporary files when a bundle needs it.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="package-default-configuration"><a class="anchor" href="#package-default-configuration"></a>Package default configuration</h3>
+<div class="paragraph">
+<p>The configuration is takend from the agent by default but you can also embed some default values for your convenience.
+This is done providing a <code>winegrower.properties</code> in the agent classloader. It takes the same configuration as the agent.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 
