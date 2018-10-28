@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Apache Winegrower JUnit5</title>
+<title>Getting Started</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/coderay-asciidoctor.css">
@@ -36,7 +36,7 @@ main {
 
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="background-color: #303284 !important;">
     <div class="container">
-      <a class="navbar-brand" href="../../index.html">
+      <a class="navbar-brand" href="index.html">
         <img src="https://karaf.apache.org/images/karaf-logo-new.png">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ main {
         <div>
           <ul class="navbar-nav mr-auto align-items-center text-uppercase">
             <li class="nav-item active">
-              <a class="nav-link" href="../../index.html">Home</span></a>
+              <a class="nav-link" href="index.html">Home</span></a>
             </li>
             <!--
             <li class="nav-item">
@@ -58,17 +58,17 @@ main {
                 Documentation
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="../../index.html">Home</a>
+                <a class="dropdown-item" href="index.html">Home</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../../getting-started.html">Getting Started</a>
-                <a class="dropdown-item" href="../../core/index.html">Core</a>
+                <a class="dropdown-item" href="getting-started.html">Getting Started</a>
+                <a class="dropdown-item" href="core/index.html">Core</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../../extension/index.html">Extensions</a>
-                <a class="dropdown-item" href="../../extension/maven/index.html">Maven</a>
-                <a class="dropdown-item" href="../../extension/junit5/index.html">Junit 5</a>
-                <a class="dropdown-item" href="../../extension/cdi/index.html">CDI</a>
-                <a class="dropdown-item" href="../../extension/servlet/index.html">Servlet</a>
-                <a class="dropdown-item" href="../../extension/agent/index.html">Javaagent</a>
+                <a class="dropdown-item" href="extension/index.html">Extensions</a>
+                <a class="dropdown-item" href="extension/maven/index.html">Maven</a>
+                <a class="dropdown-item" href="extension/junit5/index.html">Junit 5</a>
+                <a class="dropdown-item" href="extension/cdi/index.html">CDI</a>
+                <a class="dropdown-item" href="extension/servlet/index.html">Servlet</a>
+                <a class="dropdown-item" href="extension/agent/index.html">Javaagent</a>
               </div>
             </li>
             <li class="nav-item">
@@ -85,118 +85,39 @@ main {
     </div>
   </div></div></nav>
 <main class="row" role="main"><div class="col-sm-10"><div id="header" class="container">
-<h1>Apache Winegrower JUnit5</h1>
+<h1>Getting Started</h1>
 </div>
 <div id="content" class="container">
-<div id="preamble">
-<div class="sectionbody">
 <div class="paragraph">
-<p>Apache Winegrower JUnit5 allows to rely on the modern JUnit 5 framework
-to test your application.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="dependency"><a class="anchor" href="#dependency"></a>Dependency</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
-  <span class="tag">&lt;groupId&gt;</span>org.apache.winegrower<span class="tag">&lt;/groupId&gt;</span>
-  <span class="tag">&lt;artifactId&gt;</span>winegrower-testing-junit5<span class="tag">&lt;/artifactId&gt;</span>
-  <span class="tag">&lt;version&gt;</span>${winegrower.version}<span class="tag">&lt;/version&gt;</span>
-<span class="tag">&lt;/dependency&gt;</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="winegrower"><a class="anchor" href="#winegrower"></a>@Winegrower</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>@Winegrower</code> allows to start a <code>Ripener</code> per class. Each test class
-will use its own configuration based on the setup done thanks to
-<code>@Winegrower</code>.</p>
-</div>
-<div class="paragraph">
-<p>Example:</p>
+<p>To create an <code>Activator</code> and deploy it the easiest is to add <code>org.apache.winegrower:winegrower-core</code> in your <code>pom.xml</code>
+and decorate it with <code>@Header</code> and launch <code>Ripener</code> main:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Winegrower</span>
-<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
-    <span class="annotation">@Test</span>
-    <span class="type">void</span> doYourTest() {
-        <span class="comment">// ...</span>
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="monowinegrower"><a class="anchor" href="#monowinegrower"></a>@MonoWinegrower</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>@MonoWinegrower</code> is close to the previous flavor but it starts the <code>Ripener</code>
-a single time for the whole JVM lifecycle. It takes its configuration from a
-SPI on <code>Ripener.Configuration</code> class (registered thanks to <code>META-INF/services/org.apache.winegrower.Ripener$Configuration</code>).
-If you don&#8217;t register a custom configuration, default one is used.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-this flavor boots your performances but all your test classes will
-share the same state so ensure to not leak anything which can impact another test.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@MonoWinegrower</span>
-<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
-    <span class="annotation">@Test</span>
-    <span class="type">void</span> doYourTest() {
-        <span class="comment">// ...</span>
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="inject-your-services"><a class="anchor" href="#inject-your-services"></a>Inject your Services</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You can get services injected using <code>@InjectedService</code> in a class field.
-It also supports the <code>Ripener</code> and <code>OSGiServices</code>. These last two can be injected
-as test method parameters as well:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Winegrower</span>
-<span class="type">class</span> <span class="class">WinegrowerExtensionTest</span> {
-    <span class="annotation">@InjectedService</span>
-    <span class="directive">private</span> Ripener ripener;
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">application</span>;
 
-    <span class="annotation">@InjectedService</span>
-    <span class="directive">private</span> OSGiServices services;
+<span class="keyword">import</span> <span class="include">static</span> <span class="include">org.osgi.framework.Constants.BUNDLE_ACTIVATOR</span>;
 
-    <span class="annotation">@Test</span>
-    <span class="type">void</span> myTest(<span class="directive">final</span> Ripener ripener) {
-        <span class="comment">// ....</span>
+<span class="keyword">import</span> <span class="include">org.osgi.annotation.bundle.Header</span>;
+<span class="keyword">import</span> <span class="include">org.osgi.framework.BundleActivator</span>;
+<span class="keyword">import</span> <span class="include">org.osgi.framework.BundleContext</span>;
+
+<span class="annotation">@Header</span>(name = BUNDLE_ACTIVATOR, value = <span class="string"><span class="delimiter">&quot;</span><span class="content">${@class}</span><span class="delimiter">&quot;</span></span>)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">GettingStartedActivator</span> <span class="directive">implements</span> BundleActivator {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> start(<span class="directive">final</span> BundleContext context) {
+        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Hello Winegrower</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> stop(<span class="directive">final</span> BundleContext context) {
+        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Bye Winegrower</span><span class="delimiter">&quot;</span></span>);
+    }
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> main(<span class="directive">final</span> <span class="predefined-type">String</span><span class="type">[]</span> args) {
+        Ripener.main(args);
     }
 }</code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>
