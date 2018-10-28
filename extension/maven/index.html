@@ -484,92 +484,11 @@ you shouldn&#8217;t be lost.</p>
 <div class="paragraph">
 <p>Winegrower supports some custom API not requiring a full OSGi packaging
 and in particular a valid OSGi <code>META-INF/MANIFEST.MF</code>. This is typically the case
-if you are using <code>@ImplicitActivator</code>.</p>
+if you are using <code>@Header</code>.</p>
 </div>
 <div class="paragraph">
 <p>If you want to enable this feature you can either register the activator
-manually through bnd or bundle plugins but you can also use <code>winegrower:manifest</code> goal
-which will create a manifest with all the supported features.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-you can mix this tool with another manifest generator using <code>manifestBase</code> configuration.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="configuration-4"><a class="anchor" href="#configuration-4"></a>Configuration</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Property</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Default</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>classes</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.classes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.outputDirectory}</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The module to consider for the created manifest file.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>output</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.output</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.outputDirectory}/META-INF/MANIFEST.MF</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Where to create the manifest file.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>manifestBase</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.manifestBase</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to an existing manifest used as base for the one the plugin will create.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>customEntries</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Map&lt;String, String&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.customEntries</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A map of entries to add to the manifest.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>manifestContributors</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.manifestContributors</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>built in ones</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The manifest contributors to use for this generation. It is a fully qualified list of implementations of <code>ManifestContributor</code>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
+manually or we recommand you to use bnd or bundle plugins to do that.</p>
 </div>
 </div>
 </div>
