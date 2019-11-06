@@ -316,6 +316,24 @@ and keep their manifests as it and the runtime knows how to read them back.</p>
 <p>Where the fatjar is produced.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>excludeArtifacts</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.excludeArtifacts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>either artifactId or groupId:artifactId of the artifacts to ignore.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>skipIfNoActivator</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.skipIfNoActivator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should artifacts without an activator be skipped in the indexation.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -546,6 +564,24 @@ To do that, you can use <code>metadata</code> mojo.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>WINEGROWER-INF/%s.properties</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Naming pattern for each metadata - relative to output directory.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>excludeArtifacts</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.excludeArtifacts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>either artifactId or groupId:artifactId of the artifacts to ignore.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>skipIfNoActivator</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.skipIfNoActivator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should artifacts without an activator be skipped in the indexation.</p>
 </div></div></td>
 </tr>
 </tbody>
