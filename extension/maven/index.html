@@ -317,6 +317,15 @@ and keep their manifests as it and the runtime knows how to read them back.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>includeArtifacts</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.includeArtifacts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>either artifactId or groupId:artifactId of the artifacts to force the inclusion even if exclude matches it.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>excludeArtifacts</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.excludeArtifacts</code></p></td>
@@ -326,12 +335,12 @@ and keep their manifests as it and the runtime knows how to read them back.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>skipIfNoActivator</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoFiltering</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.skipIfNoActivator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.autoFiltering</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Should artifacts without an activator be skipped in the indexation.</p>
+<p>Should artifacts without an activator/OSGi component be skipped in the indexation.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -567,6 +576,15 @@ To do that, you can use <code>metadata</code> mojo.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>includeArtifacts</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.includeArtifacts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>either artifactId or groupId:artifactId of the artifacts to force the inclusion even if exclude matches it.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>excludeArtifacts</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.excludeArtifacts</code></p></td>
@@ -576,12 +594,12 @@ To do that, you can use <code>metadata</code> mojo.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>skipIfNoActivator</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>autoFiltering</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.skipIfNoActivator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.autoFiltering</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Should artifacts without an activator be skipped in the indexation.</p>
+<p>Should artifacts without an activator/OSGi component be skipped in the indexation.</p>
 </div></div></td>
 </tr>
 </tbody>
