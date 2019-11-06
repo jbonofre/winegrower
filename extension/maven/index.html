@@ -480,6 +480,80 @@ you shouldn&#8217;t be lost.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="generate-winegrower-metadata"><a class="anchor" href="#generate-winegrower-metadata"></a>Generate Winegrower metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you build a Fatjar, Winegrower uses metadata to respect the jar bundle modularity.
+It can be neat to generate these metadata without generating a fatjar - for GraalVM for example.
+To do that, you can use <code>metadata</code> mojo.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sh">mvn winegrower:metadata</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration-4"><a class="anchor" href="#configuration-4"></a>Configuration</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Property</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Default</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>buildArtifact</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.buildArtifact</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.directory}/${project.build.finalName}.${project.packaging}.</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path of the project artifact if any.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>includeScopes</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Collection&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.includeScopes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>provided,compile,runtime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The scopes included in the produced artifact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>output</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.metadata.output</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${project.build.outputDirectory}</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Where to dump metadata.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>namingPattern</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>winegrower.metadata.namingPattern</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WINEGROWER-INF/%s.properties</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Naming pattern for each metadata - relative to output directory.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="from-winegrower-no-manifest-deployment-to-osgi-deployments"><a class="anchor" href="#from-winegrower-no-manifest-deployment-to-osgi-deployments"></a>From Winegrower no-manifest deployment to OSGi deployments</h2>
 <div class="sectionbody">
 <div class="paragraph">
